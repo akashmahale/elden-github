@@ -9,13 +9,19 @@
         "128": "assets/elden-github-128.png"
     },
     "permissions": ["webRequest", "tabs", "storage"],
-    "host_permissions": ["https://github.com/*"],
+    "host_permissions": [
+        "https://dev.azure.com/*",
+        "https://*.visualstudio.com/*"
+      ],
     "background": {
         "service_worker": "background.js"
     },
     "content_scripts": [
         {
-            "matches": ["https://github.com/*"],
+            "matches": [
+                "https://dev.azure.com/*",
+                "https://*.visualstudio.com/*"
+              ],
             "js": ["content.js"],
             "run_at": "document_idle"
         }
