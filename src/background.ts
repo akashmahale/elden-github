@@ -252,6 +252,13 @@ chrome.webRequest.onBeforeRequest.addListener(
     ['requestBody']
 )
 
+// Relay messages from content scripts to the banner logic
+chrome.runtime.onMessage.addListener((message, sender) => {
+  if (message?.action) {
+    chrome.tabs.sendMessage(sender.tab.id, { action: message.action });
+  }
+});
+
 chrome.webRequest.onCompleted.addListener(
     (detail) => {
         const match = (url: string | RegExp, method = 'POST') =>
